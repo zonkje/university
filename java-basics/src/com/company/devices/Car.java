@@ -3,7 +3,7 @@ package com.company.devices;
 import com.company.creatures.Human;
 import com.company.Sellable;
 
-public class Car extends Device implements Sellable {
+public abstract class Car extends Device implements Sellable {
 
     private String color;
     private boolean isSedan;
@@ -56,6 +56,7 @@ public class Car extends Device implements Sellable {
         System.out.println("Car transaction successfully completed");
     }
 
+    public abstract void refuel();
 
     @Override
     public String toString() {

@@ -4,8 +4,10 @@ import com.company.creatures.Animal;
 import com.company.creatures.FarmAnimal;
 import com.company.creatures.Human;
 import com.company.creatures.Pet;
-import com.company.devices.Car;
-import com.company.devices.Phone;
+import com.company.devices.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -25,7 +27,7 @@ public class Main {
         gecko.feed();
 
         // #2
-        Car fabia = new Car("Fabia", "Skoda");
+        Car fabia = new LPG("Fabia", "Skoda");
         Human bob = new Human();
         bob.setSalary(3000.0);
         bob.getSalary();
@@ -33,8 +35,8 @@ public class Main {
         bob.setCar(fabia);
 
         // #6
-        Car tiguan = new Car("Tiguan", "VolksWagen");
-        Car anotherTiguan = new Car("Tiguan", "VolksWagen");
+        Car tiguan = new Diesel("Tiguan", "VolksWagen");
+        Car anotherTiguan = new Diesel("Tiguan", "VolksWagen");
         System.out.println(tiguan.equals(anotherTiguan));
         System.out.println(tiguan);
         System.out.println(anotherTiguan);
@@ -70,6 +72,21 @@ public class Main {
         Animal ptysiek = new Pet("mammals");
         ptysiek.feed(8.0);
         System.out.println(ptysiek.getWeight());
+
+        // #10
+        iphone.installAnApp("Signal");
+        List<String> appsToInstall = new ArrayList<>(){
+            {
+                add("LinkedIn");
+                add("Bolt");
+                add("Pinterest");
+            }
+        };
+        iphone.installAnApp(appsToInstall);
+        fabia.refuel();
+        tiguan.refuel();
+        Car tesla = new Electric("Model X", "Tesla");
+        tesla.refuel();
 
     }
 }

@@ -1,9 +1,16 @@
 package com.company.devices;
 
-import com.company.creatures.Human;
 import com.company.Sellable;
+import com.company.creatures.Human;
+
+import java.net.URL;
+import java.util.List;
 
 public class Phone extends Device implements Sellable {
+
+    private final static String DEFAULT_SERVER_ADDRESS = "www.apple.com/store";
+    private final static String DEFAULT_PROTOCOL = "https";
+    private final static String DEFAULT_VERSION = "1.0";
 
     private Human owner;
 
@@ -17,6 +24,45 @@ public class Phone extends Device implements Sellable {
 
     public void setOwner(Human owner) {
         this.owner = owner;
+    }
+
+    public void installAnApp(String appName) {
+        installAnApp(appName, DEFAULT_VERSION, DEFAULT_SERVER_ADDRESS);
+    }
+
+    public void installAnApp(String appName, String appVersion) {
+        installAnApp(appName, appVersion, DEFAULT_SERVER_ADDRESS);
+    }
+
+    public void installAnApp(String appName, String appVersion, String serverAddress) {
+        StringBuilder sb = new StringBuilder();
+        sb
+                .append("Downloading and installing application ")
+                .append(appName + "\n")
+                .append(". . .\n")
+                .append("version: ")
+                .append(appVersion + "\n")
+                .append(". . .\n")
+                .append("Downloading from ")
+                .append(DEFAULT_PROTOCOL)
+                .append("://")
+                .append(serverAddress + "\n")
+                .append(". . .\n")
+                .append("Downloaded. Installing... \n")
+                .append(". . .\n")
+                .append("The application has been successfully installed on your phone");
+        System.out.println(sb.toString());
+
+    }
+
+    public void installAnApp(List<String> appNames) {
+        for (String name : appNames) {
+            installAnApp(name);
+        }
+    }
+
+    public void installAnApp(URL appUrl) {
+
     }
 
 
