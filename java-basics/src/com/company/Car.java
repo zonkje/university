@@ -9,6 +9,7 @@ public class Car {
     private boolean hasManualGearbox;
     private Integer yearOfProduction;
     private Human owner;
+    private Double value;
 
     public Car(String model, String producer) {
         this.model = model;
@@ -21,5 +22,13 @@ public class Car {
 
     public void setOwner(Human owner) {
         this.owner = owner;
+    }
+
+    public Double getValue() {
+        return value;
+    }
+
+    public void setValue(Double value) {
+        this.value = value;
     }
 }

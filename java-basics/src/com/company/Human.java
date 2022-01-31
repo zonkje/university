@@ -26,6 +26,14 @@ public class Human extends Animal{
     }
 
     public void setCar(Car car) {
+        if(salary > car.getValue()){
+            System.out.println("The car has been purchased in cash");
+        } else if (car.getValue()*12 > salary){
+            System.out.println("The car was purchased on credit");
+        } else {
+            System.out.println("Get an education and get a new job or go for a raise");
+            return;
+        }
         this.car = car;
         car.setOwner(this);
     }
