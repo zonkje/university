@@ -32,7 +32,7 @@ public class Main {
         bob.setSalary(3000.0);
         bob.getSalary();
         fabia.setValue(300.0);
-        bob.setCar(fabia);
+        bob.setCar(fabia, 0);
 
         // #6
         Car tiguan = new Diesel("Tiguan", "VolksWagen");
@@ -60,7 +60,7 @@ public class Main {
         System.out.println(jon.getCash());
         System.out.println(jon.getPet());
         tiguan.setValue(80.0);
-        bob.setCar(tiguan);
+        bob.setCar(tiguan, 1);
         jon.setSalary(2000.0);
         tiguan.sell(bob, jon, 100.0);
         bob.setPhone(iphone);
@@ -86,7 +86,22 @@ public class Main {
         fabia.refuel();
         tiguan.refuel();
         Car tesla = new Electric("Model X", "Tesla");
+        tesla.setYearOfProduction(2020);
         tesla.refuel();
+
+        // #11
+        Human fin = new Human();
+        fin.setSalary(9999.0);
+        tesla.setValue(369.0);
+        fin.setCar(tesla, 0);
+        System.out.println(fin.getCar(0));
+        LPG golf = new LPG("Golf 2", "Volkswagen");
+        golf.setYearOfProduction(1999);
+        golf.setValue(111.0);
+        fin.setCar(golf, 1);
+        System.out.println(fin.getGarageValue());
+        fin.sortCarsInGarageByYearOfProductionAsc();
+        fin.printGarage();
 
     }
 }

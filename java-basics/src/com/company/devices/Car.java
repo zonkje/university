@@ -1,7 +1,8 @@
 package com.company.devices;
 
-import com.company.creatures.Human;
+import com.company.InterruptedCarTransactionException;
 import com.company.Sellable;
+import com.company.creatures.Human;
 
 public abstract class Car extends Device implements Sellable {
 
@@ -42,17 +43,23 @@ public abstract class Car extends Device implements Sellable {
 
     @Override
     public void sell(Human seller, Human buyer, Double price) {
-        if (!seller.getCar().equals(this)) {
-            System.out.println("The seller is not the owner of this car");
-            return;
+        int spotNumberInSellersGarage = seller.findCarIndex(this);
+        int firstFreeSpotNumberInBuyerGarage = buyer.findFirstFreeSpotInGarage();
+
+        if (!seller.getCar(spotNumberInSellersGarage).equals(this) || spotNumberInSellersGarage < 0) {
+            throw new InterruptedCarTransactionException("The seller is not the owner of this car");
         } else if (!(buyer.getCash() > price)) {
-            System.out.println("The buyer hasn't got enough money");
-            return;
+            throw new InterruptedCarTransactionException("The buyer hasn't got enough money");
+        } else if (firstFreeSpotNumberInBuyerGarage < 0) {
+            throw new InterruptedCarTransactionException("The buyer hasn't got any free spot in his garage");
         }
+
         buyer.setCash(buyer.getCash() - price);
         seller.setCash(seller.getCash() + price);
-        seller.setUsedCar(null);
-        buyer.setUsedCar(this);
+        buyer.setCash(buyer.getCash() - price);
+        seller.setCash(seller.getCash() + price);
+        seller.setUsedCar(null, spotNumberInSellersGarage);
+        buyer.setUsedCar(this, firstFreeSpotNumberInBuyerGarage);
         System.out.println("Car transaction successfully completed");
     }
 
