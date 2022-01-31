@@ -3,6 +3,19 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+
+        // #1
+        Animal gecko =  new Animal("reptiles");
+        gecko.feed();
+        gecko.takeForAWalk();
+        gecko.takeForAWalk();
+        gecko.takeForAWalk();
+        gecko.takeForAWalk();
+        gecko.takeForAWalk();
+        gecko.takeForAWalk();
+        gecko.takeForAWalk();
+        gecko.takeForAWalk();
+        gecko.feed();
+
     }
 }
