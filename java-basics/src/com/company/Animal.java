@@ -47,4 +47,12 @@ public class Animal {
         this. weight -= 0.4;
     }
 
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "species='" + species + '\'' +
+                ", weight=" + weight +
+                '}';
+    }
+
 }

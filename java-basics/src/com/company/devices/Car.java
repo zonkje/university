@@ -1,4 +1,6 @@
-package com.company;
+package com.company.devices;
+
+import com.company.Human;
 
 public class Car {
 
@@ -30,5 +32,23 @@ public class Car {
 
     public void setValue(Double value) {
         this.value = value;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "model='" + model + '\'' +
+                ", producer='" + producer + '\'' +
+                ", color='" + color + '\'' +
+                ", isSedan=" + isSedan +
+                ", hasManualGearbox=" + hasManualGearbox +
+                ", yearOfProduction=" + yearOfProduction +
+                ", owner=" + owner +
+                ", value=" + value +
+                '}';
     }
 }

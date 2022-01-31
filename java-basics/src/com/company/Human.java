@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.devices.Car;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -41,7 +43,7 @@ public class Human extends Animal{
     public Double getSalary() {
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
         Date date = new Date(System.currentTimeMillis());
-        System.out.println("Checking salary. date: "+ formatter.format(date));
+        System.out.println("Checking salary. Date: "+ formatter.format(date));
         System.out.println("Your salary is $"+salary);
         return salary;
     }
@@ -55,5 +57,14 @@ public class Human extends Animal{
         System.out.println("Go to the HR department and pick up the contract amendment from Mrs. Hania");
         System.out.println("We have sent information about your new salary to the ZUS and US");
         this.salary = salary;
+    }
+
+    @Override
+    public String toString() {
+        return "Human{" +
+                "pet=" + pet +
+                ", car=" + car.getModel() +
+                ", salary=" + salary +
+                '}';
     }
 }
