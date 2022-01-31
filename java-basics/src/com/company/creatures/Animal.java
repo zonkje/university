@@ -1,9 +1,11 @@
-package com.company;
+package com.company.creatures;
 
-public class Animal implements Sellable {
+import com.company.Sellable;
+
+public class Animal implements Sellable, Feedable {
 
     private final String species;
-    private Double weight;
+    Double weight;
     private Human owner;
 
     public Animal(String species) {
@@ -37,6 +39,10 @@ public class Animal implements Sellable {
         return owner;
     }
 
+    public Double getWeight() {
+        return weight;
+    }
+
     public void setOwner(Human owner) {
         this.owner = owner;
     }
@@ -68,6 +74,15 @@ public class Animal implements Sellable {
             return;
         }
         this.weight += 0.5;
+    }
+
+    @Override
+    public void feed(Double foodWeight) {
+        if(this.weight <= 0){
+            System.out.println("Animal is dead");
+            return;
+        }
+        this.weight += foodWeight*0.9;
     }
 
     public void takeForAWalk() {
