@@ -1,8 +1,9 @@
 package com.company.devices;
 
 import com.company.Human;
+import com.company.Sellable;
 
-public class Car extends Device{
+public class Car extends Device implements Sellable {
 
     private String color;
     private boolean isSedan;
@@ -36,8 +37,25 @@ public class Car extends Device{
 
     @Override
     public void turnOn() {
-        System.out.println(producer+" "+model +" has been started");
+        System.out.println(producer + " " + model + " has been started");
     }
+
+    @Override
+    public void sell(Human seller, Human buyer, Double price) {
+        if (!seller.getCar().equals(this)) {
+            System.out.println("The seller is not the owner of this car");
+            return;
+        } else if (!(buyer.getCash() > price)) {
+            System.out.println("The buyer hasn't got enough money");
+            return;
+        }
+        buyer.setCash(buyer.getCash() - price);
+        seller.setCash(seller.getCash() + price);
+        seller.setUsedCar(null);
+        buyer.setUsedCar(this);
+        System.out.println("Car transaction successfully completed");
+    }
+
 
     @Override
     public String toString() {

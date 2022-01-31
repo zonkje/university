@@ -1,9 +1,10 @@
 package com.company;
 
-public class Animal {
+public class Animal implements Sellable {
 
     private final String species;
     private Double weight;
+    private Human owner;
 
     public Animal(String species) {
         this.species = species;
@@ -32,19 +33,49 @@ public class Animal {
         }
     }
 
-    public void feed(){
-        if(this.weight <= 0){
+    public Human getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Human owner) {
+        this.owner = owner;
+    }
+
+    @Override
+    public void sell(Human seller, Human buyer, Double price) {
+        if(this instanceof Human){
+            System.out.println("Human trafficking is not allowed");
+            return;
+        }
+        if (!seller.getPet().equals(this)) {
+            System.out.println("The seller is not the owner of this animal");
+            return;
+        } else if (!(buyer.getCash() > price)) {
+            System.out.println("The buyer hasn't got enough money");
+            return;
+        }
+        buyer.setCash(buyer.getCash() - price);
+        seller.setCash(seller.getCash() + price);
+        seller.setPet(null);
+        buyer.setPet(this);
+        System.out.println("Animal transaction successfully completed");
+    }
+
+
+    public void feed() {
+        if (this.weight <= 0) {
             System.out.println("Animal is dead");
             return;
         }
         this.weight += 0.5;
     }
-    public void takeForAWalk(){
-        if(this.weight <= 0){
+
+    public void takeForAWalk() {
+        if (this.weight <= 0) {
             System.out.println("Animal is dead");
             return;
         }
-        this. weight -= 0.4;
+        this.weight -= 0.4;
     }
 
     @Override
