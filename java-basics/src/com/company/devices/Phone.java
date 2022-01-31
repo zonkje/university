@@ -90,6 +90,11 @@ public class Phone extends Device implements Sellable {
 
     @Override
     public String toString() {
-        return "Phone{}";
+        return "Phone{" +
+                "model='" + model + '\'' +
+                ", producer='" + producer + '\'' +
+                ", yearOfProduction=" + yearOfProduction +
+                ", value=" + value +
+                '}';
     }
 }

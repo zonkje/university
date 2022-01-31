@@ -103,5 +103,11 @@ public class Main {
         fin.sortCarsInGarageByYearOfProductionAsc();
         fin.printGarage();
 
+        // #12
+        System.out.println("Was jon an owner of tiguan? " + tiguan.hadAnOwner(jon));
+        System.out.println("Whether the fabia was sold to jon by a bob? " + fabia.containsTransaction(jon, bob));
+        System.out.println(tiguan.getNumberOfTransaction());
+
+
     }
 }

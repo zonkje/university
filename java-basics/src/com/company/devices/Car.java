@@ -2,7 +2,10 @@ package com.company.devices;
 
 import com.company.InterruptedCarTransactionException;
 import com.company.Sellable;
+import com.company.Transaction;
 import com.company.creatures.Human;
+
+import java.util.LinkedList;
 
 public abstract class Car extends Device implements Sellable {
 
@@ -11,6 +14,7 @@ public abstract class Car extends Device implements Sellable {
     private boolean hasManualGearbox;
     private Human owner;
     private Double value;
+    private LinkedList<Transaction> transactions = new LinkedList<>();
 
     public Car(String model, String producer) {
         super(model, producer);
@@ -36,6 +40,10 @@ public abstract class Car extends Device implements Sellable {
         return model;
     }
 
+    public LinkedList<Transaction> getTransactions() {
+        return transactions;
+    }
+
     @Override
     public void turnOn() {
         System.out.println(producer + " " + model + " has been started");
@@ -46,6 +54,11 @@ public abstract class Car extends Device implements Sellable {
         int spotNumberInSellersGarage = seller.findCarIndex(this);
         int firstFreeSpotNumberInBuyerGarage = buyer.findFirstFreeSpotInGarage();
 
+        if (getNumberOfTransaction() > 0) {
+            if (!this.transactions.getLast().getBuyer().equals(seller)) {
+                throw new InterruptedCarTransactionException("The seller is not the owner of this car");
+            }
+        }
         if (!seller.getCar(spotNumberInSellersGarage).equals(this) || spotNumberInSellersGarage < 0) {
             throw new InterruptedCarTransactionException("The seller is not the owner of this car");
         } else if (!(buyer.getCash() > price)) {
@@ -60,7 +73,30 @@ public abstract class Car extends Device implements Sellable {
         seller.setCash(seller.getCash() + price);
         seller.setUsedCar(null, spotNumberInSellersGarage);
         buyer.setUsedCar(this, firstFreeSpotNumberInBuyerGarage);
+        this.transactions.add(new Transaction(buyer, seller, price));
         System.out.println("Car transaction successfully completed");
+    }
+
+    public boolean hadAnOwner(Human human) {
+        for (Transaction transaction : transactions) {
+            if (transaction.getBuyer().equals(human) || transaction.getSeller().equals(human)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean containsTransaction(Human buyer, Human seller) {
+        for (Transaction transaction : transactions) {
+            if (transaction.getBuyer().equals(buyer) && transaction.getSeller().equals(seller)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int getNumberOfTransaction() {
+        return transactions.size();
     }
 
     public abstract void refuel();
