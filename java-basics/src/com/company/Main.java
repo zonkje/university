@@ -17,5 +17,10 @@ public class Main {
         gecko.takeForAWalk();
         gecko.feed();
 
+        // #2
+        Car fabia = new Car("Fabia", "Skoda");
+        Human bob = new Human();
+        bob.setCar(fabia);
+
     }
 }
