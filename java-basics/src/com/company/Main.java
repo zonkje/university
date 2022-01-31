@@ -34,10 +34,14 @@ public class Main {
         System.out.println(tiguan.equals(anotherTiguan));
         System.out.println(tiguan);
         System.out.println(anotherTiguan);
-        Phone iphone = new Phone();
+        Phone iphone = new Phone("Iphone SE", "Apple");
         System.out.println(gecko);
         System.out.println(bob);
         System.out.println(iphone);
+
+        // #7
+        iphone.turnOn();
+        fabia.turnOn();
 
     }
 }
