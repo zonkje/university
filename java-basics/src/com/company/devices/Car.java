@@ -1,8 +1,8 @@
 package com.company.devices;
 
-import com.company.InterruptedCarTransactionException;
+import com.company.model.InterruptedCarTransactionException;
 import com.company.Sellable;
-import com.company.Transaction;
+import com.company.model.Transaction;
 import com.company.creatures.Human;
 
 import java.util.LinkedList;

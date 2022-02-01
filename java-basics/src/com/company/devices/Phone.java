@@ -2,9 +2,13 @@ package com.company.devices;
 
 import com.company.Sellable;
 import com.company.creatures.Human;
+import com.company.model.Application;
 
 import java.net.URL;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Phone extends Device implements Sellable {
 
@@ -13,6 +17,7 @@ public class Phone extends Device implements Sellable {
     private final static String DEFAULT_VERSION = "1.0";
 
     private Human owner;
+    private Set<Application> apps = new HashSet<>();
 
     public Phone(String model, String producer) {
         super(model, producer);
@@ -62,9 +67,57 @@ public class Phone extends Device implements Sellable {
     }
 
     public void installAnApp(URL appUrl) {
-
+        System.out.println("WARNING: Make sure this URL is save!");
+        System.out.println("Downloading application from address: " + appUrl.toString());
+        System.out.println(". . .");
+        System.out.println("Downloaded. Installing...");
+        System.out.println(". . .");
+        System.out.println("The application has been successfully installed on your phone");
     }
 
+    public void installAnApp(Application... applications){
+        for(Application application : applications) {
+            if (owner.getCash() >= application.getPrice()) {
+                apps.add(application);
+                owner.setCash(owner.getCash() - application.getPrice());
+                System.out.println("Application "+application.getName()+" been successfully installed on your phone");
+            } else {
+                System.out.println("You don't have enough funds to complete this transaction");
+            }
+        }
+    }
+
+    public boolean isApplicationInstalled(Application app){
+        return apps.contains(app);
+    }
+
+    public boolean isApplicationInstalled(String appName){
+        return apps.stream().anyMatch(app -> appName.equals(app.getName()));
+    }
+
+    public void displayAllFreeApps(){
+        apps.stream()
+                .filter(app -> app.getPrice() == 0.0)
+                .forEach(Application::showInfo);
+    }
+
+    public Double getValueOfInstalledApps(){
+        return apps.stream()
+                .mapToDouble(Application::getPrice)
+                .sum();
+    }
+
+    public void displayAllInstalledAppsInAlphabeticalOrder(){
+        apps.stream()
+                .sorted(Comparator.comparing(Application::getName))
+                .forEach(Application::showInfo);
+    }
+
+    public void displayAllInstalledAppsByPriceAscending(){
+        apps.stream()
+                .sorted(Comparator.comparingDouble(Application::getPrice))
+                .forEach(Application::showInfo);
+    }
 
     @Override
     public void turnOn() {

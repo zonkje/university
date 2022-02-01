@@ -5,6 +5,7 @@ import com.company.creatures.FarmAnimal;
 import com.company.creatures.Human;
 import com.company.creatures.Pet;
 import com.company.devices.*;
+import com.company.model.Application;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +76,7 @@ public class Main {
 
         // #10
         iphone.installAnApp("Signal");
-        List<String> appsToInstall = new ArrayList<>(){
+        List<String> appsToInstall = new ArrayList<>() {
             {
                 add("LinkedIn");
                 add("Bolt");
@@ -108,6 +109,27 @@ public class Main {
         System.out.println("Whether the fabia was sold to jon by a bob? " + fabia.containsTransaction(jon, bob));
         System.out.println(tiguan.getNumberOfTransaction());
 
+        // #13
+        Application spotify = new Application("Spotify", "22.3.1", 4.9);
+        Application netflix = new Application("Netflix", "1.1.9", 20.0);
+        Application tidal = new Application("Tidal", "4.1.a", 7.0);
+        Application twitter = new Application("Twitter", "2.0", 0.0);
+        Application outlook = new Application("Outlook", "2022.1.1", 0.0);
+        Application twitch = new Application("Twitch", "6.3", 1.5);
+        jon.setCash(241.0);
+        System.out.println(iphone.getOwner().getCash());
+        iphone.installAnApp(spotify, netflix, tidal, twitch, twitter, outlook);
+        System.out.println(iphone.getOwner().getCash());
+        System.out.println(iphone.getValueOfInstalledApps());
+        System.out.println(iphone.isApplicationInstalled(tidal));
+        System.out.println(iphone.isApplicationInstalled("Twitch"));
+        System.out.println(iphone.isApplicationInstalled("Bolt"));
+        System.out.println("===");
+        iphone.displayAllFreeApps();
+        System.out.println("===");
+        iphone.displayAllInstalledAppsInAlphabeticalOrder();
+        System.out.println("===");
+        iphone.displayAllInstalledAppsByPriceAscending();
 
     }
 }
